@@ -19,14 +19,12 @@ class Cart:
         return sum(price_list)
 
     def check_out(self):
-        #El precio de compra de todos los artículos del carrito se transfiere del monedero del propietario del carrito al monedero del propietario del artículo.
         if self.owner.wallet.balance >= self.total_amount():
             self.owner.wallet.withdraw(self.total_amount())
             #le doy la plata al dueño
             for item in self.items:
                 owner  = item.owner
                 owner.wallet.deposit(item.price)
-        #La propiedad de todos los artículos de la cesta se transferirá al propietario de la misma.
         for item in self.items:
             item.set_owner(self.owner)
         #Vaciar el contenido del carro.
