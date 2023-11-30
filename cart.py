@@ -18,14 +18,13 @@ class Cart:
             price_list.append(item.price)
         return sum(price_list)
 
-    def check_out(self):
-        if self.owner.wallet.balance >= self.total_amount():
-            self.owner.wallet.withdraw(self.total_amount())
-            #le doy la plata al dueño
-            for item in self.items:
-                owner  = item.owner
-                owner.wallet.deposit(item.price)
+  def check_out(self):
+    if self.owner.wallet.balance >= self.total_amount():
+        self.owner.wallet.withdraw(self.total_amount())
+        # Le doy la plata al dueño
         for item in self.items:
-            item.set_owner(self.owner)
-        #Vaciar el contenido del carro.
-        self.items.clear
+            owner = item.owner
+            owner.wallet.deposit(item.price)
+
+        # Vaciar el contenido del carro.
+        self.items.clear()  
