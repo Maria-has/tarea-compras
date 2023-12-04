@@ -3,6 +3,7 @@ from item import Item
 from seller import Seller
 from wallet import __init__
 
+
 seller = Seller("DICストア")
 for i in range(10):
     Item("CPU", 40830, seller)

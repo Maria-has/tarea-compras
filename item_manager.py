@@ -1,14 +1,12 @@
-# このモジュールをインクルードすると、自身の所有するItemインスタンスを操れるようになります。
-
 from item import Item
 from tabulate import tabulate
 from itertools import groupby
 
-def items_list(self):   # 自身の所有する（自身がオーナーとなっている）全てのItemインスタンスを返します。
+def items_list(self):   
     items = [item for item in Item.item_all() if item.owner == self]
     return items
 
-def pick_items(self, number, quantity):   # numberと対応した自身の所有するItemインスタンスを指定されたquantitiy分返します。
+def pick_items(self, number, quantity):   
     items = filter(lambda num: num["number"] == number, _stock(self))
     items = list(items)
     if len(items) == 0:
@@ -18,7 +16,8 @@ def pick_items(self, number, quantity):   # numberと対応した自身の所有
     else:
         return items[0]["items"][0:quantity]
 
-def show_items(self):   # 自身の所有するItemインスタンスの在庫状況を、["番号", "商品名", "金額", "数量"]という列でテーブル形式にして出力します。
+def show_items(self):   
+  # 自身の所有するItemインスタンスの在庫状況を、["番号", "商品名", "金額", "数量"]という列でテーブル形式にして出力します。
     table_data = []
     for stock in _stock(self):
         table_data.append([stock['number'], stock['label']['name'], stock['label']['price'], len(stock['items'])])
